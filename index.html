@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>birthday-letter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="envelope-cover">
+            <div class="confetti-container"></div>
+            <div class="envelope">
+                <div class="letter">
+                    <div class="wishes">
+                        <strong>happiest birthday tarun🎂</strong>
+                        <p>
+                           not gonna make it too dramatic but i geniuinely hope you have a really nice day and an even better year ahead filled with good vibes, more smiles and just the right amount of chaos to make it fun😄
+                           <br>
+                           <br>
+                           May things work out for you, may you always stay happy, healthy, blessed and may life surprise you in good ways only.
+                           <br>
+                           have an amazing birthday!
+                           <br>
+                           <br>
+                           <br>
+                            lots of love❤️
+                            <br>
+                            -priyanshi
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <audio id="bg-music" src="hbd.mp3"></audio>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const container = document.querySelector('.confetti-container');
+            const envelope = document.querySelector('.envelope');
+
+            function createConfetti() {
+                const flowers = ["🌸", "🌼", "🌺", "💮", "🌷"];
+
+                const isMobile = window.innerWidth < 600;
+                const total = isMobile ? 40 : 80;
+
+                for (let i = 0; i < total; i++) {
+
+                    setTimeout(() => {
+
+                        let confetti = document.createElement('div');
+                        confetti.classList.add('confetti');
+
+                        confetti.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+
+                        const spread = window.innerWidth * 0.8;
+                        const offset = window.innerWidth * 0.1;
+
+                        confetti.style.left = (Math.random() * spread + offset) + 'px';
+                        confetti.style.top = '-20px';
+
+                        const size = isMobile ? (Math.random() * 8 + 12) : (Math.random() * 12 + 14);
+                        confetti.style.fontSize = size + 'px';
+
+                        confetti.style.animationDuration = (Math.random() * 4 + 6) + 's';
+
+                        container.appendChild(confetti);
+
+                        setTimeout(() => confetti.remove(), 8000);
+
+                    }, i * 80);
+                }
+            }
+
+            envelope.addEventListener('click', () => {
+                envelope.classList.toggle('flap');
+
+                setTimeout(() => {
+                    createConfetti();
+                }, 300);
+            });
+
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

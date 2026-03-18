@@ -1,0 +1,208 @@
+:root {
+    --primary: #fff;
+    --background-color: rgb(192, 234, 255);
+    --background-envelope-color: #fef6e4;
+    --envelope-tab: #f2dcc2;
+    --envelope-cover: #e4bb84;
+    --shadow-color: rgba(0, 40, 116, 0.25);
+    --txt-color: #333;
+    --flower-color: pink;
+    --letter-font: 'segoe ui', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 130vh;
+    font-family: var(--letter-font);
+    overflow: hidden;
+}
+
+.container {
+    display: grid;
+    place-items: center;
+}
+
+.envelope-cover {
+    background: var(--background-envelope-color);
+    border-radius: 12px;
+    box-shadow: 0px 15px 40px var(--shadow-color);
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.envelope-cover:hover {
+    transform: scale(1.02);
+}
+
+.envelope {
+    position: relative;
+    width: 645px;
+    height: 450px;
+    perspective: 1000px;
+    z-index: 1;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    border-top: 300px solid var(--envelope-tab);
+    border-left: 325px solid transparent;
+    border-right: 320px solid transparent;
+    transform-origin: top;
+    transition: all 0.1s ease-in-out;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-top: 200px solid transparent;
+    border-right: 320px solid var(--envelope-cover);
+    border-bottom: 250px solid var(--envelope-cover);
+    border-left: 325px solid var(--envelope-cover);
+
+}
+
+.letter {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    top: 0;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 80%;
+    background: var(--primary);
+    text-align: center;
+    transition: all 0.1s ease-in-out;
+    box-shadow: 0px, 5px, 10px var(--shadow-color);
+    padding: 20px 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.letter .wishes {
+    color: var(--txt-color);
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+strong {
+    padding: 20px 20px;
+    margin-top: 10px;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+p {
+    font-size: 15px;
+}
+
+.flap .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.flap .envelope .letter {
+    bottom: 100px;
+    transform: translate(-50%, -180px);
+    transition-delay: 0.4s;
+}
+
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999; 
+}
+
+.confetti {
+    text-shadow: 0 0 5px rgba(255, 192, 203, 0.6);
+    position: absolute;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(180deg);
+        opacity: 0.8;
+    }
+}
+
+.confetti:nth-child(odd) {
+    opacity: 0.7;
+    filter: blur(0.5px);
+}
+
+@media (max-width: 600px) {
+
+    body {
+        height: 100vh;
+    }
+
+    .envelope {
+        width: 80vw;
+        height: 55vw;
+    }
+
+    .envelope::before {
+        border-top: 150px solid var(--envelope-tab);
+        border-left: 155px solid transparent;
+        border-right: 152px solid transparent;
+    }
+
+    .envelope::after {
+        border-top: 100px solid transparent;
+        border-right: 152px solid var(--envelope-cover);
+        border-bottom: 110px solid var(--envelope-cover);
+        border-left: 155px solid var(--envelope-cover);
+
+    }
+
+    .letter {
+        padding: 10px;
+    }
+
+    .letter .wishes {
+        font-size: 12px;
+        padding: 0;
+    }
+
+p{
+    font-size: 8px;
+}
+    strong {
+        font-size: 18px;
+        padding: 0;
+    }
+}
+
+.flap .envelope .letter {
+    bottom: 100px;
+    transform: translate(-50%, -25vw) !important ;
+}
